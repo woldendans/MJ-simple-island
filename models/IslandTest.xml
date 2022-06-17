@@ -1,33 +1,26 @@
 <sequence values="UWBRGEYINSOTus" origin="Center">
   <!-- Generate borders -->
-  <all in="U/*" out="B/*" symmetry="(x)" />
-  <all in="*/B" out="*/Y" symmetry="(x)" />
-  <all in="B" out="U" />
-
-  <all in="Y*" out="B*" symmetry="(y)" />
-  <all in="Y" out="U" />
-  <all in="*B" out="*Y" symmetry="(y)" />
-  <all in="B" out="U" />
+  <prl in="***/*U*/***" out="***/*B*/***"/>
 
   <!-- Draw an island skeleton -->
-  <one in="WY" out="WW" steps="1" />
+  <one in="WB" out="WW" steps="1" />
   <!-- Steps define the lenght of the backbone -->
-  <one in="YWY/YYY" out="YWY/YWY" steps="400" />
-  <one in="YWY/YWY/YYY" out="YWY/YRY/YYY" />
+  <one in="BWB/BBB" out="BWB/BWB" steps="400" />
+  <one in="BWB/BWB/BBB" out="BWB/BRB/BBB" />
   <!-- Adjust steps to change number of branches. More branches = rounder, smoother island with less inner water -->
-  <one in="YYY/WWW" out="YWY/WWW" steps="20" />
+  <one in="BBB/WWW" out="BWB/WWW" steps="20" />
   <!-- Adjust steps for the length of branches. More lenght = bigger island -->
-  <one in="YWY/YYY" out="YWY/YWY" steps="2300" />
+  <one in="BWB/BBB" out="BWB/BWB" steps="2300" />
   <all in="R" out="W" />
 
   <!-- Seed more sea -->
   <!-- Adjust p to reduce lakes -->
-  <prl in="Y" out="U" p="0.00003" steps="1" />
+  <prl in="B" out="U" p="0.00003" steps="1" />
 
   <!-- Voronoi -->
   <one>
-    <rule in="WY" out="WW" />
-    <rule in="UY" out="UU" />
+    <rule in="WB" out="WW" />
+    <rule in="UB" out="UU" />
   </one>
 
   <!-- Smoothing -->
