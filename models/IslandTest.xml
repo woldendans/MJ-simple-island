@@ -9,16 +9,20 @@
   <all in="*B" out="*Y" symmetry="(y)" />
   <all in="B" out="U" />
 
-  <!-- Draw island skeleton -->
+  <!-- Draw an island skeleton -->
   <one in="WY" out="WW" steps="1" />
+  <!-- Steps define the lenght of the backbone -->
   <one in="YWY/YYY" out="YWY/YWY" steps="400" />
   <one in="YWY/YWY/YYY" out="YWY/YRY/YYY" />
-  <one in="YYY/WWW" out="YWY/WWW" steps="20" /> <!-- Adjust steps to change number of branch. More branches = rounder, smoother island with less inner water -->
-  <one in="YWY/YYY" out="YWY/YWY" steps="2300" /> <!-- Adjust steps for the length of branches. More lenght = bigger island -->
+  <!-- Adjust steps to change number of branches. More branches = rounder, smoother island with less inner water -->
+  <one in="YYY/WWW" out="YWY/WWW" steps="20" />
+  <!-- Adjust steps for the length of branches. More lenght = bigger island -->
+  <one in="YWY/YYY" out="YWY/YWY" steps="2300" />
   <all in="R" out="W" />
 
   <!-- Seed more sea -->
-  <prl in="Y" out="U" p="0.00003" steps="1" /> <!-- Adjust sp to reduce lakes -->
+  <!-- Adjust p to reduce lakes -->
+  <prl in="Y" out="U" p="0.00003" steps="1" />
 
   <!-- Voronoi -->
   <one>
@@ -36,22 +40,25 @@
   <all in="U/*" out="I/*" symmetry="(x)" />
   <all in="UI" out="UU" />
   <all in="WU" out="WR" />
-  <prl in="RU" out="RR" steps="30" p="0.5" /> <!-- Steps = size of the shallow water around the coast -->
+  <!-- Steps = size of the shallow water around the coast -->
+  <prl in="RU" out="RR" steps="30" p="0.5" />
   <all in="RU" out="RB" />
   <all in="BU" out="BB" />
   <all in="R" out="U" />
 
-  <!-- Spwan a few river sources (paint coast green on some lenght to force sources to be inland) -->
+  <!-- Spwan a few river sources (paint coast green on some thickness to force sources to be inland) -->
   <all in="UW" out="UG" />
-  <all in="GW" out="GG" steps="80" /> <!-- Increase steps to push sources back from the sea -->
-  <prl in="WW" out="WI" p="0.000015" steps="1" /> <!-- Play with p to change the number of sources -->
+  <!-- Increase steps to push sources back from the sea -->
+  <all in="GW" out="GG" steps="80" />
+  <!-- Play with p to change the number of sources -->
+  <prl in="WW" out="WI" p="0.000015" steps="1" />
   <all in="G" out="W" />
 
   <!-- Trace a river from lakes and sources if applicable -->
   <sequence>
     <one in="IW" out="IR" steps="1">
       <field for="R" from="U" on="W"/>
-    </one>  
+    </one>
     <one>
       <rule in="RU" out="NU" />
       <rule in="RO" out="NO" />
@@ -62,30 +69,30 @@
       <observe value="W" to="WN"/>
       <observe value="R" to="N"/>
     </one>
-    
-    <!-- Color done (O) -->
+
+    <!-- Color done (O) so that we can merge rivers -->
     <all in="N" out="O" />
     <all in="OI" out="OO" />
   </sequence>
 
-  <!-- Enlarge the connection with the sea -->
+  <!-- Widen the connection with the sea -->
   <prl steps="2" p="0.8">
     <rule in="UO/UW" out="UO/UO" />
     <rule in="UO/WW" out="UO/OO" />
   </prl>
-  <!-- Smooth them -->
+  <!-- Smooth -->
   <convolution neighborhood="Moore" periodic="True">
     <rule in="W" out="O" sum="6..8" values="O"/>
   </convolution>
 
-  <!-- Generate beaches starting point-->
+  <!-- Generate beaches starting points -->
   <prl in="WU" out="YU" steps="1" p="0.005"/>
   <!-- March them along the coast -->
   <all steps="30">
     <rule in="UU/YW" out="UU/YY" />
     <rule in="UW/YW" out="UY/YY" />
   </all>
-  <!-- Enlarge them with a bit of randomness -->
+  <!-- Widen them with a bit of randomness -->
   <prl in="WY" out="YY" steps="3" p="0.4" />
   <!-- Smooth them -->
   <convolution neighborhood="Moore" periodic="True">
@@ -94,10 +101,10 @@
   </convolution>
 
 
-  <!-- Lakes & rivers back to blue -->
+  <!-- Lakes & rivers back to lake blue -->
   <all in="O" out="u" />
 
-  <!-- Line coast & rivers & lakes -->
+  <!-- Line coast & rivers & lakes with a darker blue -->
   <all in="UY" out="TY" />
   <all in="UW" out="TW" />
   <all in="uW" out="TW" />
@@ -115,7 +122,7 @@
 
   <prl in="W" out="G" p="0.00001" steps="1" />
 
-  <!-- Grow them, forest stronger-->
+  <!-- Grow them, forest 3x stronger -->
   <one>
     <rule in="WE" out="EE" />
     <rule in="WE" out="EE" />
@@ -128,10 +135,11 @@
     <rule in="E" out="G" sum="6..8" values="O"/>
   </convolution>
 
-  <!-- If any white, it's grass (islands) -->
+  <!-- If any white, it's grass (islands). -->
+  <!-- TODO: Eliminate "islands" next to lakes or islands to small -->
   <all in="W" out="G" />
 
-  <!-- Black is deep ocean -->
+  <!-- Change deep ocean color -->
   <all in="B" out="I" />
   <convolution neighborhood="Moore" periodic="True">
     <rule in="U" out="I" sum="5..8" values="I"/>
@@ -169,7 +177,7 @@
     <rule in="S" out="s" sum="5..8" values="s"/>
     <rule in="s" out="S" sum="5..8" values="S"/>
   </convolution>
-  
+
   <!-- Final step, trace back rivers to mountains -->
   <sequence>
     <one in="EEE/ETE" out="EEE/ERE" steps="1" />
@@ -183,10 +191,9 @@
       <observe value="E" to="EN"/>
       <observe value="R" to="N"/>
     </one>
-    
+
     <one in="NS" out="RN" steps="5" />
     <all in="R" out="T" />
     <all in="N" out="T" />
   </sequence>
-
 </sequence>
