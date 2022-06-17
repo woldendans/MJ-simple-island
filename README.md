@@ -1,5 +1,9 @@
 # MJ-simple-island
- A simple island map generator configuration for MarkovJunior.
+A simple island map generator configuration for MarkovJunior.
+ 
+<p align="center">
+ <img src="https://user-images.githubusercontent.com/3719038/174351494-944bb092-85dd-45b1-afc7-1cd6b06365a2.png"/>
+</p>
 
 ## How to use
 
