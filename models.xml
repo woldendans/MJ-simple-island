@@ -1,0 +1,4 @@
+<models>
+  <model name="IslandTest" size="1024" d="2" steps="30000000" amount="100"/>
+</models>
+
