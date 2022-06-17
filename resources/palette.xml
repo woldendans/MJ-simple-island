@@ -1,0 +1,18 @@
+﻿<colors>
+  <color symbol="B" value="000000" name="Black, background/voronoi"/>
+  <color symbol="W" value="FFF1E8" name="White, background"/>
+  <color symbol="N" value="AB5236" name="Brown, used for pathing"/>
+  <color symbol="R" value="FF004D" name="Red, used for pathing and voronoi"/>
+  <color symbol="O" value="FFA300" name="Orange, used for pathing"/>
+
+  <color symbol="G" value="A8D1A5" name="Level 0"/>
+  <color symbol="E" value="93C08D" name="Level 1"/>
+  <color symbol="S" value="D0D8AC" name="Level 2"/>
+  <color symbol="s" value="E9E0B2" name="Level 3"/>
+  <color symbol="Y" value="F1EBC2" name="Beaches"/>
+
+  <color symbol="I" value="ABCBE8" name="Sea blue"/>
+  <color symbol="U" value="CEE6F9" name="Coast blue"/>
+  <color symbol="u" value="DCF0FD" name="Lake blue"/>
+  <color symbol="T" value="2B8AA9" name="Border blue for water"/>
+</colors>
